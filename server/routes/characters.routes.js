@@ -1,5 +1,5 @@
 import express from 'express';
-import { getCharacters } from '../controllers/characters.js';
+import { getCharacters } from '../controllers/characters.controller.js';
 
 const router = express.Router();
 
