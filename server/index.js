@@ -28,11 +28,11 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('connected to socket')
+    console.log(`connection ${socket.id}`)
 
     socket.on('message', (message) => {
-        console.log(message);
-        io.emit('message', `${socket.id} said ${message}`)
+        console.log(`${socket.id.substr(0, 4)} said ${message}`);
+        io.emit('message', message);
     });
 });
 
