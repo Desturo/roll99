@@ -30,9 +30,9 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
     console.log(`connection ${socket.id.substr(0, 4)}`)
 
-    socket.on('message', (message) => {
+    socket.on('toServer', (message) => {
         const mssageObject = { text: message, id: socket.id};
-        io.emit('message', mssageObject);
+        io.emit('toClient', mssageObject);
     });
 });
 
