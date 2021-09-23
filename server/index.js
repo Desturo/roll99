@@ -5,6 +5,7 @@ import { Server } from 'socket.io';
 import { createServer } from 'http'
 
 import characterRoutes from './routes/characters.routes.js';
+import usersRoutes from './routes/users.routes.js';
 import CharaterModel from './models/character.model.js';
 
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
+app.use('/users', usersRoutes);
 app.use('/characters', characterRoutes);
 
 app.get('/', (req, res) => {

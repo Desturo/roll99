@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 
 import Form from './components/Form/Form.jsx';
 import Input from './components/Input/Input.jsx';
+import UserForm from './components/UserForm/UserFrom.jsx';
 
 import { socket } from './services/socket.js';
 import { generate } from 'random-key';
@@ -25,7 +26,7 @@ function App() {
 
   return (
     <div>
-      <Form></Form>
+      {/* <Form></Form>
       <Input sendMessage={ sendMessage } message={ message } setMessage={ setMessage }></Input>
       <ul>
         {
@@ -35,7 +36,9 @@ function App() {
             )
           })
         }
-      </ul>
+      </ul> */}
+
+      <UserForm></UserForm>
     </div>
   );
 }
