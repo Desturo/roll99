@@ -11,9 +11,12 @@ const UserForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('test');
-        const { data } = await api.createUser(user);
-        console.log(data);
+        try {
+            const { data } = await api.createUser(user);
+            console.log(data);
+        } catch (error) {
+            window.alert(error.response.data.type);
+        }
     }
     
     return(

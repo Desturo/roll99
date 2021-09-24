@@ -17,9 +17,8 @@ export const createUser = async (req, res) => {
 
     const user = req.body;
 
-     if(UserModel.exists({ username: user.username }))
+     if(!await UserModel.exists({ username: user.username }))
      {
-         console.log('user doesnt exist');
         const newUser = new UserModel(user);
 
         try {
@@ -29,11 +28,10 @@ export const createUser = async (req, res) => {
 
             res.status(201).json(newUser);
         } catch (error) {
-            console.log('err');
-            //res.status(404).json({ message: error });
+            res.status(404).json({ message: error });
         }
      } else {
-         res.status(400).json({ message: 'username taken' });
+         res.status(409).json({ type: 'username taken' });
      }
     
 }
