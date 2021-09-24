@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 
 import * as api from '../../api';
 
-const LoginForm = () => {
+const LoginForm = ({ setLoggedIn }) => {
 
     const [user, setUser] = useState({
         username: '',
@@ -18,7 +18,9 @@ const LoginForm = () => {
             }
             const { data } = await api.checkUser(bodyObject);
 
-            console.log(data.loginValid);
+            if(data.loginValid) {
+                setLoggedIn(true);
+            }
         } catch (error) {
             console.log('Error in api request from frontend when trying to check login');
             console.log(error);

@@ -13,6 +13,9 @@ import { generate } from 'random-key';
 function App() {
 
   const [message, setMessage] = useState();
+
+  const [loggedIn, setLoggedIn] = useState(false)
+
   const sendMessage = () => {
     socket.emit('toServer', message);
   }
@@ -40,7 +43,7 @@ function App() {
       </ul> */}
 
       <UserForm></UserForm>
-      <LoginForm></LoginForm>
+      <LoginForm setLoggedIn={ setLoggedIn }></LoginForm>
     </div>
   );
 }
