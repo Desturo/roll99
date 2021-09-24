@@ -35,3 +35,17 @@ export const createUser = async (req, res) => {
      }
     
 }
+
+export const getUserCheck = async (req, res) => {
+    const user = req.body
+
+    if(await UserModel.exists({ 
+        username: user.username,
+        password: user.password
+    })) {
+        res.status(200).json({ loginValid: true })
+    } else {
+        res.status(200).json({ loginValid: false })
+    }
+}
+

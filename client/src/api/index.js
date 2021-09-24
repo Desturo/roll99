@@ -8,3 +8,4 @@ export const createCharacter = (newCharacter) => axios.post(charactersUrl, newCh
 
 export const fetchUsers = () => axios.get(usersUrl);
 export const createUser = (newUser) => axios.post(usersUrl, newUser);
+export const checkUser = (passwordToCheck) => axios.post(usersUrl + '/check', passwordToCheck);

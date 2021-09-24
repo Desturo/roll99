@@ -3,6 +3,7 @@ import { React, useState, useEffect } from 'react';
 import Form from './components/Form/Form.jsx';
 import Input from './components/Input/Input.jsx';
 import UserForm from './components/UserForm/UserFrom.jsx';
+import LoginForm from './components/LoginForm/LoginForm.jsx';
 
 import { socket } from './services/socket.js';
 import { generate } from 'random-key';
@@ -39,6 +40,7 @@ function App() {
       </ul> */}
 
       <UserForm></UserForm>
+      <LoginForm></LoginForm>
     </div>
   );
 }
