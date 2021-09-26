@@ -1,8 +1,9 @@
-import mongoose from 'mongoose'
-
 import CharaterModel from '../models/character.model.js';
 
 export const getCharacters = async (req, res) => {
+
+    console.log(req.user.name);
+
     try {
         const characters = await CharaterModel.find();
 
