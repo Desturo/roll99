@@ -1,8 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+.App {
+    text-align: center;
+}
 
-* {
-    font-family: 'Sora', sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background: rgb(112, 199, 228);
+    color: white;
+}
+
+.nav-links {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+
+}
+
+.nav-links li:hover {
+    color: black;
 }

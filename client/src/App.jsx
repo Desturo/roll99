@@ -1,10 +1,16 @@
 import { React, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import './App.css';
+
 import Form from './components/Form/Form.jsx';
 import Input from './components/Input/Input.jsx';
 import UserForm from './components/UserForm/UserFrom.jsx';
 import LoginForm from './components/LoginForm/LoginForm.jsx';
+import About from './components/About/About.jsx';
+import Nav from './components/Nav/Nav.jsx';
+import Shop from './components/Shop/Shop.jsx';
+import ItemDetail from './components/ItemDetail/ItemDetail';
 
 
 import { socket } from './services/socket.js';
@@ -31,20 +37,32 @@ function App() {
   }, [messages]);
 
   return (
-      {/* <Form></Form>
-      <Input sendMessage={ sendMessage } message={ message } setMessage={ setMessage }></Input>
-      <ul>
-        {
-          messages.map((message) => {
-            return (
-              <li key={ generate() }> { message.id } &nbsp; said &nbsp; { message.text}</li>
-            )
-          })
-        }
-      </ul>
+    <Router>
+      <div className='App'>
+        {/* <Form></Form>
+        <Input sendMessage={ sendMessage } message={ message } setMessage={ setMessage }></Input>
+        <ul>
+          {
+            messages.map((message) => {
+              return (
+                <li key={ generate() }> { message.id } &nbsp; said &nbsp; { message.text}</li>
+              )
+            })
+          }
+        </ul>
 
-      <UserForm></UserForm>
-      <LoginForm setLoggedIn={ setLoggedIn }></LoginForm> */}
+        <UserForm></UserForm>
+        <LoginForm setLoggedIn={ setLoggedIn }></LoginForm> */}
+
+        <Nav/>
+        <Switch>
+          <Route path='/about' component={ About } />
+          <Route path='/' exact component={ UserForm } />
+          <Route path='/shop' exact component={ Shop } />
+          <Route path='/shop/:id' component={ ItemDetail }/>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
