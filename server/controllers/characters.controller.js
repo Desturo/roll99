@@ -2,7 +2,7 @@ import CharaterModel from '../models/character.model.js';
 
 export const getCharacters = async (req, res) => {
 
-    console.log(req.user.name);
+    //req.user object availiable because of middleware
 
     try {
         const characters = await CharaterModel.find();

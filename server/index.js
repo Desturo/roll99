@@ -5,8 +5,7 @@ import { Server } from 'socket.io';
 import { createServer } from 'http'
 
 import characterRoutes from './routes/characters.routes.js';
-import loginRoutes from './routes/login.routes.js'
-import CharaterModel from './models/character.model.js';
+import authRoutes from './routes/auth.routes.js';
 
 const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = 'mongodb+srv://Desturo:LTDB-14DX@cluster0.oyl5i.mongodb.net/characterDatabase?retryWrites=true&w=majority'
@@ -22,8 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.use('/login', loginRoutes)
 app.use('/characters', characterRoutes);
+app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello to the roll99 APi');
