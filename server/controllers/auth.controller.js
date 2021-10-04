@@ -1,14 +1,14 @@
 import bcrtpt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-
-const users = [];
+import UserModel from '../models/user.model.js';
 
 let refreshTokens = [];
 
 dotenv.config();
 
-export const getUsers = (req, res) => {
+export const getUsers = async (req, res) => {
+    const users = await UserModel.find({ });
     res.json(users)
 }
 
@@ -18,20 +18,33 @@ export const createUser = async (req, res) => {
     try {
         const hashedPassword = await bcrtpt.hash(req.body.password, 10);
 
-        const user = { name: req.body.name, password: hashedPassword }
-        users.push(user);
-        res.status(201).send('User created');
+        const user = { username: req.body.username, password: hashedPassword }
+
+        //checing if usermodel database already has a user with the entered name and gives docs object containing all the user objects with the given name as an array
+        UserModel.find({ username: user.username }, (err, docs) => {
+            if(docs.length) {
+                console.log(`User ${user.username} already exists`);
+                console.log(docs);
+                res.status(409).send('User already exists')
+            } else {
+                const newUser = new UserModel(user);
+                newUser.save((error) => {
+                    if (error) return console.log(error);
+                });
+                res.status(201).send('User created');
+            }
+        })
+
+        
     } catch (error) {
         res.status(500).send(error.message);
     }
 }
 
 export const loginUser = async (req, res) => {
-    const user = users.find(user => user.name == req.body.name);
+    const query = await UserModel.find({ username: req.body.username })
 
-    if (user == null) {
-        return res.status(400).send('Cannot find user');
-    }
+    const user = { username: query[0].username, password: query[0].password };
 
     try {
         if (await bcrtpt.compare(req.body.password, user.password)) {
@@ -61,7 +74,7 @@ export const getRefreshtoken = (req, res) => {
     if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECERET, (err, user) => {
         if (err) return res.sendStatus(403);
-        const accessToken = generateAccesToken({ name: user.name });
+        const accessToken = generateAccesToken({ username: user.name });
         res.json({ accessToken: accessToken });
     })
 }
