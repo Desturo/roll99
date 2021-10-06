@@ -3,12 +3,15 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
 import { createServer } from 'http'
+import dotenv from 'dotenv';
 
 import characterRoutes from './routes/characters.routes.js';
 import authRoutes from './routes/auth.routes.js';
 
 const PORT = process.env.PORT || 5000;
-const CONNECTION_URL = 'mongodb+srv://Desturo:LTDB-14DX@cluster0.oyl5i.mongodb.net/characterDatabase?retryWrites=true&w=majority'
+const CONNECTION_URL = process.env.CONNECTION_URL;
+
+dotenv.config();
 
 const app = express();
 const server = createServer(app);
