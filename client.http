@@ -1,2 +1,2 @@
-GET
-http://localhost:5000/auth/create
+POST 
+https://localhhost:5000/auth/login

@@ -4,14 +4,13 @@ import mongoose from "mongoose";
 import { Server } from "socket.io";
 import { createServer } from "http";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import characterRoutes from "./routes/characters.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 
 const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = process.env.CONNECTION_URL;
-
-dotenv.config();
 
 const app = express();
 const server = createServer(app);
@@ -21,7 +20,11 @@ const io = new Server(server, {
   },
 });
 
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  credentials: true
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

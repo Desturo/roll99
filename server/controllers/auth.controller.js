@@ -47,7 +47,18 @@ export const loginUser = async (req, res) => {
       const accesToken = generateAccesToken(user);
       const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECERET);
       refreshTokens.push(refreshToken);
-      res.json({ accesToken: accesToken, refreshToken: refreshToken });
+      //Just sends tokenst as json
+      //res.json({ accesToken: accesToken, refreshToken: refreshToken });
+      //sending tokens as Cookies
+      console.log('sendToken');
+      const yearInSeconds = 365 * 24 * 60 * 60;
+      res.cookie('jwToken', accesToken,
+        {
+          maxAge: yearInSeconds,
+          // You can't access these tokens in the client's javascript
+          httpOnly: true,
+        });
+      res.send('worked')
     } else {
       res.send("Wrong Password");
     }
@@ -73,8 +84,7 @@ export const getRefreshtoken = (req, res) => {
   });
 };
 
+//non expiering
 const generateAccesToken = (user) => {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECERET, {
-    expiresIn: "5min",
-  });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECERET);
 };

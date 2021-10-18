@@ -11,3 +11,11 @@ export const authenticateToken = (req, res, next) => {
         next();
     })
 }
+
+export const sendToken = (token) => {
+    return (req, res, next) => {
+        console.log('this works');
+        console.log(req.test);
+        next();
+    }
+}

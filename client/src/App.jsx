@@ -11,8 +11,11 @@ import LoginForm from "./components/LoginForm/LoginForm.jsx";
 
 import { socket } from "./services/socket.js";
 import { generate } from "random-key";
+import axios from "axios";
 
 function App() {
+
+  axios.defaults.withCredentials = true;
   const [message, setMessage] = useState();
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -31,13 +34,24 @@ function App() {
     });
   }, [messages]);
 
+  const logIn = async () => {
+    const data = await axios.post('http://localhost:5000/auth/login',{username: 'Kenu', password: 'keno2'});
+    console.log(data);
+  }
+
   return (
     <Router>
       <div className="App">
         <button
           onClick={() => {
-            Cookies.set("foo", "bar", { expires: 99 });
-            Cookies.get("foo");
+            logIn();
+          }}
+        >
+          Log
+        </button>
+        <button
+          onClick={() => {
+            console.log(Cookies.get("jwT"));
           }}
         >
           Test
