@@ -8,4 +8,6 @@ export const createCharacter = (newCharacter) => axios.post(charactersUrl, newCh
 
 export const fetchUsers = () => axios.get(usersUrl);
 export const createUser = (newUser) => axios.post(usersUrl, newUser);
-export const checkUser = (passwordToCheck) => axios.post(usersUrl + '/check', passwordToCheck);
+
+//getting back a refreshtoken as cookie and a JSON Object with the loginValid key. Needs an Object with username and password values
+export const loginUser = (userToCheck) => axios.post(usersUrl + '/login', userToCheck);

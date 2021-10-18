@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 
 import * as api from '../../api';
 
-const LoginForm = ({ setLoggedIn }) => {
+const LoginForm = () => {
 
     const [user, setUser] = useState({
         username: '',
@@ -16,10 +16,10 @@ const LoginForm = ({ setLoggedIn }) => {
                 username: user.username,
                 password: user.password
             }
-            const { data } = await api.checkUser(bodyObject);
+            const { data } = await api.loginUser(bodyObject);
 
             if(data.loginValid) {
-                setLoggedIn(true);
+                console.log(true);
             }
         } catch (error) {
             console.log('Error in api request from frontend when trying to check login');
@@ -31,17 +31,15 @@ const LoginForm = ({ setLoggedIn }) => {
 
     return(
         <form autoComplete="off" onSubmit={ handleSubmit }>
-            <label htmlFor="username">Login Name: &nbsp;</label>
-            <input type="text" name="username" onChange={ (e) => {
+            <input type="text" name="username" placeholder='Username' onChange={ (e) => {
                 setUser({ ...user, username: e.target.value})
             }}/> <br />
 
-            <label htmlFor="password">Login Password: &nbsp;</label>
-            <input type="text" name="password" onChange={ (e) => {
+            <input type="text" name="password" placeholder='Passowrd' onChange={ (e) => {
                 setUser({ ...user, password: e.target.value})
             }}/> <br />
 
-            <button type="submit">Submit</button>
+            <button type="submit">Login</button>
         </form>
     )
 }

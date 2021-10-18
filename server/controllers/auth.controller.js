@@ -58,7 +58,7 @@ export const loginUser = async (req, res) => {
           // You can't access these tokens in the client's javascript
           httpOnly: true,
         });
-      res.send('worked')
+      res.status(200).send({ loginValid: true });
     } else {
       res.send("Wrong Password");
     }
