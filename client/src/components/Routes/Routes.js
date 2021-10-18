@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import { BrowserRouter as Redirect, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Navigate, Switch, Route } from "react-router-dom";
 
 import LoginForm  from '../LoginForm/LoginForm.jsx';
 import Form from '../Form/Form.jsx';
@@ -24,7 +24,7 @@ const ProtectedRoute = ({auth, component: Component, ...rest}) => {
             <Component/>
         ): 
             (
-                <Redirect to="/login" />
+                <Navigate to="/dashboard" replace />
             )
         }
         />
