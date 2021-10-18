@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const charactersUrl = 'http://localhost:5000/characters';
-const usersUrl = 'http://localhost:5000/users';
+const usersUrl = 'http://localhost:5000/auth';
 
 export const fetchCharacters = () => axios.get(charactersUrl);
 export const createCharacter = (newCharacter) => axios.post(charactersUrl, newCharacter);

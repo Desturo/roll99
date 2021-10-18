@@ -49,7 +49,7 @@ const Routes = () => {
   const Auth = useContext(AuthApi);
   return (
       <Switch>
-          <Route path='/login' component={LoginForm}/>
+          <ProtectedLogin path='/login' auth={Auth.auth} component={LoginForm}/>
           <ProtectedRoute path='/form' auth={Auth.auth} component={Form}/>
       </Switch>
   )
@@ -64,6 +64,21 @@ const ProtectedRoute = ({auth, component: Component, ...rest}) => {
       ): 
           (
               <Redirect to="/login" />
+          )
+      }
+      />
+  )
+}
+
+const ProtectedLogin = ({auth, component: Component, ...rest}) => {
+  return(
+      <Route 
+      {...rest}
+      render={() => !auth ? (
+          <Component/>
+      ): 
+          (
+              <Redirect to="/form" />
           )
       }
       />

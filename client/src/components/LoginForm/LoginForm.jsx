@@ -1,8 +1,11 @@
-import { React, useState } from 'react';
+import { React, useState, useContext } from 'react';
+import Cookies from "js-cookie";    
 
 import * as api from '../../api';
+import AuthApi from '../../AuthApi';
 
 const LoginForm = () => {
+    const Auth = useContext(AuthApi);
 
     const [user, setUser] = useState({
         username: '',
@@ -11,6 +14,7 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         try {
             const bodyObject = { 
                 username: user.username,
@@ -19,8 +23,9 @@ const LoginForm = () => {
             const { data } = await api.loginUser(bodyObject);
 
             if(data.loginValid) {
-                console.log(true);
+                Auth.setAuth(true)
             }
+            
         } catch (error) {
             console.log('Error in api request from frontend when trying to check login');
             console.log(error);
