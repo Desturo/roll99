@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { React, useState } from 'react';
 
 import * as api from '../../api';
@@ -110,7 +111,7 @@ const Form = () => {
                 <button type="submit">Submit</button>
             </form>
             <button type='button' onClick={(e) => {
-                
+                console.log(Cookies.get('jwToken')); 
             }}>Logout</button>
         </div>
     )

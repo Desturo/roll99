@@ -51,11 +51,11 @@ export const loginUser = async (req, res) => {
       //res.json({ accesToken: accesToken, refreshToken: refreshToken });
       //sending tokens as Cookies
       console.log("sendToken");
-      const DayInMs = 25 * 60 * 60 * 1000;
+      const FiveMinInMs = 5 * 60 * 1000;
       res.cookie("jwToken", accesToken, {
-        maxAge: DayInMs,
+        maxAge: FiveMinInMs,
         // You can't access these tokens in the client's javascript
-        httpOnly: true,
+        httpOnly: false,
       });
       res.status(200).send({ loginValid: true });
     } else {
