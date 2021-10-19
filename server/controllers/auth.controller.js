@@ -50,14 +50,13 @@ export const loginUser = async (req, res) => {
       //Just sends tokenst as json
       //res.json({ accesToken: accesToken, refreshToken: refreshToken });
       //sending tokens as Cookies
-      console.log('sendToken');
-      const yearInSeconds = 365 * 24 * 60 * 60;
-      res.cookie('jwToken', accesToken,
-        {
-          maxAge: yearInSeconds,
-          // You can't access these tokens in the client's javascript
-          httpOnly: true,
-        });
+      console.log("sendToken");
+      const fiveMinInSeconds = 5 * 60;
+      res.cookie("jwToken", accesToken, {
+        maxAge: fiveMinInSeconds,
+        // You can't access these tokens in the client's javascript
+        httpOnly: true,
+      });
       res.status(200).send({ loginValid: true });
     } else {
       res.send("Wrong Password");
