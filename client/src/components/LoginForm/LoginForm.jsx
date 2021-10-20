@@ -23,6 +23,7 @@ const LoginForm = () => {
             const { data } = await api.loginUser(bodyObject);
 
             if(data.loginValid) {
+                console.log(await api.checkToken());
                 Auth.setAuth(true)
             }
             

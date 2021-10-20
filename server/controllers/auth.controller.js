@@ -2,6 +2,7 @@ import bcrtpt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import UserModel from "../models/user.model.js";
+import cookieParser from 'cookie-parser'
 
 let refreshTokens = [];
 
@@ -13,7 +14,7 @@ export const getUsers = async (req, res) => {
 };
 
 export const checkToken = async (req, res) => {
-  console.log(req.token);
+  console.log(req.cookies);
   res.status(200).send('token valid');
 }
 
