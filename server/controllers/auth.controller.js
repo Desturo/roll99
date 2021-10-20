@@ -14,7 +14,10 @@ export const getUsers = async (req, res) => {
 };
 
 export const checkToken = async (req, res) => {
-  console.log(req.cookies);
+  jwt.verify(req.cookies.jwToken, process.env.ACCESS_TOKEN_SECERET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    console.log(user);
+  })
   res.status(200).send('token valid');
 }
 
