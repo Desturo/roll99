@@ -11,3 +11,5 @@ export const createUser = (newUser) => axios.post(usersUrl, newUser);
 
 //getting back a refreshtoken as cookie and a JSON Object with the loginValid key. Needs an Object with username and password values
 export const loginUser = (userToCheck) => axios.post(usersUrl + '/login', userToCheck);
+
+export const checkToken = () => axios.get(usersUrl + '/checkToken');

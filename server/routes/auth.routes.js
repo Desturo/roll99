@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUsers, createUser, loginUser, logoutUser, getRefreshtoken } from '../controllers/auth.controller.js';
+import { getUsers, createUser, loginUser, logoutUser, getRefreshtoken, checkToken } from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
@@ -8,5 +8,7 @@ router.post('/create', createUser);
 router.delete('/logout', logoutUser);
 router.post('/login', loginUser);
 router.post('/token', getRefreshtoken);
+
+router.get('/checkToken', checkToken)
 
 export default router;

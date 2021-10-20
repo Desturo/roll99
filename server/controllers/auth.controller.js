@@ -12,6 +12,11 @@ export const getUsers = async (req, res) => {
   res.json(users);
 };
 
+export const checkToken = async (req, res) => {
+  console.log(req.token);
+  res.status(200).send('token valid');
+}
+
 export const createUser = async (req, res) => {
   try {
     const hashedPassword = await bcrtpt.hash(req.body.password, 10);
