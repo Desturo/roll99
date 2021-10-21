@@ -68,7 +68,7 @@ export const loginUser = async (req, res) => {
       });
       res.status(200).send({ loginValid: true });
     } else {
-      res.send("Wrong Password");
+      res.status(401).send({ passwordValid: false});
     }
   } catch (error) {
     res.status(500).send(error.message);

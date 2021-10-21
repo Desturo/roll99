@@ -13,6 +13,7 @@ import AuthApi from "./AuthApi";
 import { socket } from "./services/socket.js";
 import { generate } from "random-key";
 import axios from "axios";
+import CreateUser from "./components/CreateUser/CreateUser";
 
 function App() {
 
@@ -51,6 +52,7 @@ const Routes = () => {
       <Switch>
           <ProtectedLogin path='/login' auth={Auth.auth} component={LoginForm}/>
           <ProtectedRoute path='/form' auth={Auth.auth} component={Form}/>
+          <Route path='/signIn' component={CreateUser}></Route>
       </Switch>
   )
 }

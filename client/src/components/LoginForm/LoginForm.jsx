@@ -28,8 +28,7 @@ const LoginForm = () => {
             }
             
         } catch (error) {
-            console.log('Error in api request from frontend when trying to check login');
-            console.log(error);
+            console.log(error.passwordValid);
         }
 
     }
