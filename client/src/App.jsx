@@ -1,5 +1,10 @@
 import { React, useState, useEffect, useContext } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Cookies from "js-cookie";
 
 import "./App.css";
@@ -16,7 +21,6 @@ import axios from "axios";
 import CreateUser from "./components/CreateUser/CreateUser";
 
 function App() {
-
   axios.defaults.withCredentials = true;
   const [message, setMessage] = useState();
 
@@ -27,20 +31,21 @@ function App() {
   };
   const [messages, setMessages] = useState([]);
 
+  //TODO check if token is present then validate token and then set auth contextapi to true
+  
   useEffect(() => {
     socket.once("toClient", (messageObject) => {
       setMessages([...messages, messageObject]);
       console.log(
         `${messageObject.id.substr(0, 4)} said ${messageObject.text}`
       );
-    });   
+    });
   }, [messages]);
 
-
   return (
-    <AuthApi.Provider value={{auth, setAuth}}>
+    <AuthApi.Provider value={{ auth, setAuth }}>
       <Router>
-          <Routes/>
+        <Routes />
       </Router>
     </AuthApi.Provider>
   );
@@ -49,42 +54,30 @@ function App() {
 const Routes = () => {
   const Auth = useContext(AuthApi);
   return (
-      <Switch>
-          <ProtectedLogin path='/login' auth={Auth.auth} component={LoginForm}/>
-          <ProtectedRoute path='/form' auth={Auth.auth} component={Form}/>
-          <Route path='/signIn' component={CreateUser}></Route>
-      </Switch>
-  )
-}
+    <Switch>
+      <ProtectedLogin path="/login" auth={Auth.auth} component={LoginForm} />
+      <ProtectedRoute path="/form" auth={Auth.auth} component={Form} />
+      <Route path="/signIn" component={CreateUser}></Route>
+    </Switch>
+  );
+};
 
-const ProtectedRoute = ({auth, component: Component, ...rest}) => {
-  return(
-      <Route 
+const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
+  return (
+    <Route
       {...rest}
-      render={() => auth ? (
-          <Component/>
-      ): 
-          (
-              <Redirect to="/login" />
-          )
-      }
-      />
-  )
-}
+      render={() => (auth ? <Component /> : <Redirect to="/login" />)}
+    />
+  );
+};
 
-const ProtectedLogin = ({auth, component: Component, ...rest}) => {
-  return(
-      <Route 
+const ProtectedLogin = ({ auth, component: Component, ...rest }) => {
+  return (
+    <Route
       {...rest}
-      render={() => !auth ? (
-          <Component/>
-      ): 
-          (
-              <Redirect to="/form" />
-          )
-      }
-      />
-  )
-}
+      render={() => (!auth ? <Component /> : <Redirect to="/form" />)}
+    />
+  );
+};
 
 export default App;
