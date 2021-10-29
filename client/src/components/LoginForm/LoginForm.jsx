@@ -1,52 +1,59 @@
-import { React, useState, useContext } from 'react';
-import Cookies from "js-cookie";    
+import { React, useState, useContext } from "react";
+import Cookies from "js-cookie";
 
-import * as api from '../../api';
-import AuthApi from '../../AuthApi';
+import * as api from "../../api";
+import AuthApi from "../../AuthApi";
 
 const LoginForm = () => {
-    const Auth = useContext(AuthApi);
+  const Auth = useContext(AuthApi);
 
-    const [user, setUser] = useState({
-        username: '',
-        password: ''
-    })
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        try {
-            const bodyObject = { 
-                username: user.username,
-                password: user.password
-            }
-            const { data } = await api.loginUser(bodyObject);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-            if(data.loginValid) {
-                console.log(await api.checkToken());
-                Auth.setAuth(true)
-            }
-            
-        } catch (error) {
-            console.log(error.passwordValid);
-        }
+    try {
+      const bodyObject = {
+        username: user.username,
+        password: user.password,
+      };
+      const { data } = await api.loginUser(bodyObject);
 
+      if (data.loginValid) {
+        console.log(await api.checkToken());
+        Auth.setAuth(true);
+      }
+    } catch (error) {
+      console.log(error.passwordValid);
     }
-    
+  };
 
-    return(
-        <form autoComplete="off" onSubmit={ handleSubmit }>
-            <input type="text" name="username" placeholder='Username' onChange={ (e) => {
-                setUser({ ...user, username: e.target.value})
-            }}/> <br />
-
-            <input type="text" name="password" placeholder='Passowrd' onChange={ (e) => {
-                setUser({ ...user, password: e.target.value})
-            }}/> <br />
-
-            <button type="submit">Login</button>
-        </form>
-    )
-}
+  return (
+    <form autoComplete="off" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        onChange={(e) => {
+          setUser({ ...user, username: e.target.value });
+        }}
+      />{" "}
+      <br />
+      <input
+        type="text"
+        name="password"
+        placeholder="Passowrd"
+        onChange={(e) => {
+          setUser({ ...user, password: e.target.value });
+        }}
+      />{" "}
+      <br />
+      <button type="submit">Login</button>
+    </form>
+  );
+};
 
 export default LoginForm;

@@ -2,7 +2,7 @@ import bcrtpt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import UserModel from "../models/user.model.js";
-import cookieParser from 'cookie-parser'
+import cookieParser from "cookie-parser";
 
 let refreshTokens = [];
 
@@ -14,12 +14,15 @@ export const getUsers = async (req, res) => {
 };
 
 export const checkToken = async (req, res) => {
-  jwt.verify(req.cookies.jwToken, process.env.ACCESS_TOKEN_SECERET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    console.log(user);
-  })
-  res.status(200).send('token valid');
-}
+  jwt.verify(
+    req.cookies.jwToken,
+    process.env.ACCESS_TOKEN_SECERET,
+    (err, user) => {
+      if (err) return res.sendStatus(403);
+    }
+  );
+  res.status(200).send("token valid");
+};
 
 export const createUser = async (req, res) => {
   try {
@@ -68,7 +71,7 @@ export const loginUser = async (req, res) => {
       });
       res.status(200).send({ loginValid: true });
     } else {
-      res.status(401).send({ passwordValid: false});
+      res.status(401).send({ passwordValid: false });
     }
   } catch (error) {
     res.status(500).send(error.message);

@@ -9,6 +9,8 @@ import Cookies from "js-cookie";
 
 import "./App.css";
 
+import * as api from "./api/index.js";
+
 import Form from "./components/Form/Form.jsx";
 import Input from "./components/Input/Input.jsx";
 import UserForm from "./components/UserForm/UserFrom.jsx";
@@ -32,8 +34,17 @@ function App() {
   const [messages, setMessages] = useState([]);
 
   //TODO check if token is present then validate token and then set auth contextapi to true
-  
+
+  const checkTokenValid = async () => {
+    const data = await api.checkToken();
+    console.log(data.data);
+  };
+
   useEffect(() => {
+    if (Cookies.get("jwToken") !== undefined) {
+      checkTokenValid();
+    }
+
     socket.once("toClient", (messageObject) => {
       setMessages([...messages, messageObject]);
       console.log(
