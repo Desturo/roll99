@@ -18,10 +18,13 @@ export const checkToken = async (req, res) => {
     req.cookies.jwToken,
     process.env.ACCESS_TOKEN_SECERET,
     (err, user) => {
-      if (err) return res.sendStatus(403);
+      if (err) {
+        res.send(403);
+      } else {
+        res.status(200).send("token valid");
+      }
     }
   );
-  res.status(200).send("token valid");
 };
 
 export const createUser = async (req, res) => {

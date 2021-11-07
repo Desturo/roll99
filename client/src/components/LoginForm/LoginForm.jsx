@@ -1,34 +1,27 @@
-import { React, useState, useContext } from "react";
+import { React, useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import auth from "../../logic/auth";
 
 import * as api from "../../api";
-import AuthApi from "../../AuthApi";
 
-const LoginForm = () => {
-  const Auth = useContext(AuthApi);
-
+const LoginForm = (props) => {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
 
+  useEffect(() => {
+    auth.isAuthenticated().then((status) => {
+      status && props.history.push("/form");
+    });
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const bodyObject = {
-        username: user.username,
-        password: user.password,
-      };
-      const { data } = await api.loginUser(bodyObject);
-
-      if (data.loginValid) {
-        console.log(await api.checkToken());
-        Auth.setAuth(true);
-      }
-    } catch (error) {
-      console.log(error.passwordValid);
-    }
+    auth.login(user, () => {
+      props.history.push("/form");
+    });
   };
 
   return (
