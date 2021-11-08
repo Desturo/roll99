@@ -19,7 +19,7 @@ export const checkToken = async (req, res) => {
     process.env.ACCESS_TOKEN_SECERET,
     (err, user) => {
       if (err) {
-        res.send(403);
+        res.sendStatus(403);
       } else {
         res.status(200).send("token valid");
       }

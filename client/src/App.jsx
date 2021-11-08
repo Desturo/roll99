@@ -32,18 +32,7 @@ function App() {
   };
   const [messages, setMessages] = useState([]);
 
-  //TODO check if token is present then validate token and then set auth contextapi to true
-
-  const checkTokenValid = async () => {
-    const data = await api.checkToken();
-    data.data === "token valid" && console.log("Token is valid");
-  };
-
   useEffect(() => {
-    if (Cookies.get("jwToken") !== undefined) {
-      checkTokenValid();
-    }
-
     socket.once("toClient", (messageObject) => {
       setMessages([...messages, messageObject]);
       console.log(

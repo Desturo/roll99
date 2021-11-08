@@ -29,13 +29,12 @@ class Auth {
   isAuthenticated = async () => {
     try {
       const data = await api.checkToken();
+
       if (data.data === "token valid") {
-        console.log("valid toekn");
-        return true;
+        this.authenticated = true;
       }
     } catch (error) {
-      console.log("no valid toekn");
-      return false;
+      this.authenticated = false;
     }
   };
 }

@@ -10,10 +10,13 @@ const LoginForm = (props) => {
     password: "",
   });
 
+  const checkAuth = async () => {
+    await auth.isAuthenticated();
+    auth.authenticated && props.history.push("/form");
+  };
+
   useEffect(() => {
-    auth.isAuthenticated().then((status) => {
-      status && props.history.push("/form");
-    });
+    checkAuth();
   }, []);
 
   const handleSubmit = async (e) => {
