@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import auth from "../../logic/auth";
 
@@ -11,7 +11,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) => {
         if (auth.authenticated) {
-          return <div {...props}>test</div>;
+          return <Component {...props}></Component>;
         } else {
           return <Redirect to="/" />;
         }

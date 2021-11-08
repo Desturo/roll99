@@ -7,9 +7,7 @@ const LandingPage = (props) => {
       <h1>Landing Page</h1>
       <button
         onClick={() => {
-          auth.login(() => {
-            props.history.push("/form");
-          });
+          props.history.push("/login");
         }}
       >
         Login
