@@ -6,18 +6,22 @@ const LandingPage = (props) => {
 
   const checkUser = async () => {
     await auth.updateUser();
+    setUsername(auth.user)
   };
 
   useEffect(() => {
     checkUser();
-    setTimeout(setUsername(auth.user), 1000);
   }, []);
   return (
     <div>
       <h1>R99</h1>
-      <h3>{username}</h3>
+      <h3 onClick={() => {
+        auth.logout(() => {
+          props.history.push("/")
+        });
+      }}>{username}</h3>
       <button onClick={() => {}}>Create Campaign</button>
-      <button onClick={() => {}}>Create Character</button>
+      <button onClick={() => {props.history.push("/character/create")}}>Create Character</button>
       <br />
       <input type="text" />
       <button onClick={() => {}}>Join Room</button>

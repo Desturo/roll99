@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { React, useState } from "react";
 
 import * as api from "../../api";
@@ -26,9 +25,15 @@ const Form = (props) => {
       speed: 0,
     },
   });
+
+  const getUser = async () => {
+    await auth.updateUser();
+    setCharacter({ ...character, creator: auth.user });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    await getUser();
     const { data } = await api.createCharacter(character);
     console.log(data);
   };
@@ -59,16 +64,7 @@ const Form = (props) => {
           onChange={(e) => {
             setCharacter({ ...character, lastName: e.target.value });
           }}
-        />{" "}
-        <br />
-        <label htmlFor="creator">Creator: &nbsp;</label>
-        <input
-          type="text"
-          name="creator"
-          onChange={(e) => {
-            setCharacter({ ...character, creator: e.target.value });
-          }}
-        />{" "}
+        />
         <br />
         <label htmlFor="race">Race: &nbsp;</label>
         <input
@@ -77,7 +73,7 @@ const Form = (props) => {
           onChange={(e) => {
             setCharacter({ ...character, race: e.target.value });
           }}
-        />{" "}
+        />
         <br />
         <label htmlFor="origin">Origin: &nbsp;</label>
         <input
@@ -86,7 +82,7 @@ const Form = (props) => {
           onChange={(e) => {
             setCharacter({ ...character, origin: e.target.value });
           }}
-        />{" "}
+        />
         <br />
         <div>
           <label htmlFor="abilityName">Ability Name: &nbsp;</label>

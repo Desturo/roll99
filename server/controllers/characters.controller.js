@@ -1,4 +1,5 @@
 import CharaterModel from '../models/character.model.js';
+import UserModel from "../models/user.model.js"
 
 export const getCharacters = async (req, res) => {
 
@@ -17,6 +18,10 @@ export const getCharacters = async (req, res) => {
 export const createCharacter = async (req, res) => {
 
     const character = req.body;
+
+    UserModel.find({ username: character.creator}, (err, doc) => {
+        console.log(doc[0].id);
+    })
 
     const newCharacter = new CharaterModel(character);
 

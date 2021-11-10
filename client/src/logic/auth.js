@@ -1,4 +1,5 @@
 import * as api from "../api/index";
+import Cookies from "js-cookie";
 
 class Auth {
   constructor() {
@@ -12,7 +13,7 @@ class Auth {
 
       if (data.loginValid) {
         const result = await api.checkToken();
-        result.data === "token valid"
+        result.data.valid
           ? (this.authenticated = true)
           : console.log("invalid login");
         cb();
@@ -24,14 +25,13 @@ class Auth {
 
   logout(cb) {
     this.authenticated = false;
+    Cookies.remove("jwToken")
     cb();
   }
 
   isAuthenticated = async () => {
     try {
       const data = await api.checkToken();
-
-      console.log(data);
 
       if (data.data.valid) {
         this.authenticated = true;
@@ -46,7 +46,7 @@ class Auth {
       const data = await api.checkToken();
 
       if (data.data.valid) {
-        console.log("test");
+        console.log(`Changed Username to ${data.data.username}`);
         this.user = data.data.username;
       }
     } catch (error) {

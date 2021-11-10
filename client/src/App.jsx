@@ -1,20 +1,14 @@
-import { React, useState, useEffect, useContext } from "react";
+import { React, useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
+  Route
 } from "react-router-dom";
-import Cookies from "js-cookie";
 
 import "./App.css";
-
-import * as api from "./api/index.js";
 import ProtectedRoute from "./components/ProtectedRoute/protected.route";
 
 import Form from "./components/Form/Form.jsx";
-import Input from "./components/Input/Input.jsx";
-import UserForm from "./components/UserForm/UserFrom.jsx";
 import LoginForm from "./components/LoginForm/LoginForm.jsx";
 
 import { socket } from "./services/socket.js";
@@ -48,6 +42,7 @@ function App() {
           <Route exact path="/" component={LoginForm} />
           <Route exact path="/register" component={CreateUser} />
           <ProtectedRoute exact path="/home" component={LandingPage} />
+          <ProtectedRoute exact path="/character/create" component={Form} />
           <ProtectedRoute exact path="/form" component={Form} />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
