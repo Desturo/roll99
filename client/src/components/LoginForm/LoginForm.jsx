@@ -12,7 +12,7 @@ const LoginForm = (props) => {
 
   const checkAuth = async () => {
     await auth.isAuthenticated();
-    auth.authenticated && props.history.push("/form");
+    auth.authenticated && props.history.push("/home");
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const LoginForm = (props) => {
     e.preventDefault();
 
     auth.login(user, () => {
-      props.history.push("/form");
+      props.history.push("/home");
     });
   };
 
@@ -36,7 +36,7 @@ const LoginForm = (props) => {
         onChange={(e) => {
           setUser({ ...user, username: e.target.value });
         }}
-      />{" "}
+      />
       <br />
       <input
         type="text"
@@ -45,9 +45,18 @@ const LoginForm = (props) => {
         onChange={(e) => {
           setUser({ ...user, password: e.target.value });
         }}
-      />{" "}
+      />
       <br />
       <button type="submit">Login</button>
+      <br />
+      <button
+        type="button"
+        onClick={(e) => {
+          props.history.push("/register");
+        }}
+      >
+        Register
+      </button>
     </form>
   );
 };

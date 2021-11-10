@@ -3,6 +3,7 @@ import * as api from "../api/index";
 class Auth {
   constructor() {
     this.authenticated = false;
+    this.user = "no user";
   }
 
   login = async (user, cb) => {
@@ -30,11 +31,26 @@ class Auth {
     try {
       const data = await api.checkToken();
 
-      if (data.data === "token valid") {
+      console.log(data);
+
+      if (data.data.valid) {
         this.authenticated = true;
       }
     } catch (error) {
       this.authenticated = false;
+    }
+  };
+
+  updateUser = async () => {
+    try {
+      const data = await api.checkToken();
+
+      if (data.data.valid) {
+        console.log("test");
+        this.user = data.data.username;
+      }
+    } catch (error) {
+      this.user = "error";
     }
   };
 }

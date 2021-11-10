@@ -1,34 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import * as api from '../../api/index.js';
+import * as api from "../../api/index.js";
+import auth from "../../logic/auth.js";
 
-const CreateUser = () => {
+const CreateUser = (props) => {
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
 
-    const [user, setUser] = useState({
-        username: '',
-        password: ''
-    })
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await api.createUser(user);
+    auth.login(user, () => {
+      props.history.push("/home");
+    });
+    setUser({
+      username: "",
+      password: "",
+    });
+  };
 
-    const onSubmit = (e) => {
-        e.preventDefault()
-        api.createUser(user);
-        setUser({
-            username: '',
-            password: ''
-        })
-    }
+  return (
+    <form onSubmit={onSubmit}>
+      <input
+        type="text"
+        name="username"
+        placeholder="username"
+        onChange={(e) => {
+          setUser({ ...user, username: e.target.value });
+        }}
+      />
+      <input
+        type="text"
+        name="password"
+        placeholder="password"
+        onChange={(e) => {
+          setUser({ ...user, password: e.target.value });
+        }}
+      />
+      <button type="submit">Create User</button>
+      <br />
+      <button
+        type="button"
+        onClick={(e) => {
+          props.history.push("/");
+        }}
+      >
+        Back to Login
+      </button>
+    </form>
+  );
+};
 
-    return (
-        <form onSubmit={onSubmit}>
-            <input type="text" placeholder="username" onChange={(e) => {
-                setUser({ ...user, username: e.target.value});
-            }} value={user.password} />
-            <input type="text" placeholder="password" onChange={(e) => {
-                setUser({ ...user, password: e.target.value});
-            }} value={user.password} />
-            <button type="submit" >Create User</button>
-        </form>
-    )
-}
-
-export default CreateUser
+export default CreateUser;
