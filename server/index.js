@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 
 import characterRoutes from "./routes/characters.routes.js";
 import authRoutes from "./routes/auth.routes.js";
+import campaignRoutes from "./routes/campaign.routes.js"
 
 const PORT = process.env.PORT || 5000;
 const CONNECTION_URL = process.env.CONNECTION_URL;
@@ -30,6 +31,7 @@ app.use(express.json());
 
 app.use("/characters", characterRoutes);
 app.use("/auth", authRoutes);
+app.use("/campaign", campaignRoutes)
 
 app.get("/", (req, res) => {
   res.send("Hello to the roll99 APi");

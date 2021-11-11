@@ -27,7 +27,7 @@ const LandingPage = (props) => {
         }}>My Characters</li>
         <li style={ {cursor: "pointer"}}>My Campaigns</li>
       </ul>
-      <button onClick={() => {}}>Create Campaign</button>
+      <button onClick={() => {props.history.push("/campaigns/create")}}>Create Campaign</button>
       <button onClick={() => {props.history.push("/characters/create")}}>Create Character</button>
       <br />
       <input type="text" />

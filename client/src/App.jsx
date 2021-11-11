@@ -17,6 +17,7 @@ import axios from "axios";
 import CreateUser from "./components/CreateUser/CreateUser";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Characters from "./components/Characters/Characters";
+import CreateCampaign from "./components/CreateCampaign/CreateCampaign";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -46,6 +47,7 @@ function App() {
           <ProtectedRoute exact path="/characters/create" component={Form} />
           <ProtectedRoute exact path="/form" component={Form} />
           <ProtectedRoute exect path="/characters" component={Characters} />
+          <ProtectedRoute exect path="/campaigns/create" component={CreateCampaign} />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>
