@@ -1,8 +1,8 @@
 import express from 'express';
-import { tets } from '../controllers/campaign.controller.js';
+import { createCampaign } from '../controllers/campaign.controller.js';
 
 const router = express.Router();
 
-router.get('/', tets);
+router.post('/', createCampaign);
 
 export default router;

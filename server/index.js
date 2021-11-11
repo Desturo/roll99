@@ -31,7 +31,7 @@ app.use(express.json());
 
 app.use("/characters", characterRoutes);
 app.use("/auth", authRoutes);
-app.use("/campaign", campaignRoutes)
+app.use("/campaigns", campaignRoutes)
 
 app.get("/", (req, res) => {
   res.send("Hello to the roll99 APi");

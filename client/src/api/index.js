@@ -2,6 +2,7 @@ import axios from "axios";
 
 const charactersUrl = "http://localhost:5000/characters";
 const usersUrl = "http://localhost:5000/auth";
+const campaignsUrl = "http://localhost:5000/campaigns"
 
 //fetch Characters belonging the user specified by id
 export const fetchCharacters = (id) => axios.post(charactersUrl + "/get", id);
@@ -19,3 +20,5 @@ export const loginUser = (userToCheck) =>
 
 export const checkToken = () =>
   axios.get(usersUrl + "/checkToken", { withCredentials: true });
+
+export const createCampaign = (campaignName) => axios.post(campaignsUrl, campaignName)
