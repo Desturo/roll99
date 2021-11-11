@@ -6,6 +6,7 @@ const AbilitySchema = mongoose.Schema({
 });
 
 const characterSchema = mongoose.Schema({
+    campaign: String,
     firstName: String,
     lastName: String,
     creator: String,

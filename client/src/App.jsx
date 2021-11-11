@@ -16,6 +16,7 @@ import { generate } from "random-key";
 import axios from "axios";
 import CreateUser from "./components/CreateUser/CreateUser";
 import LandingPage from "./components/LandingPage/LandingPage";
+import Characters from "./components/Characters/Characters";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -42,8 +43,9 @@ function App() {
           <Route exact path="/" component={LoginForm} />
           <Route exact path="/register" component={CreateUser} />
           <ProtectedRoute exact path="/home" component={LandingPage} />
-          <ProtectedRoute exact path="/character/create" component={Form} />
+          <ProtectedRoute exact path="/characters/create" component={Form} />
           <ProtectedRoute exact path="/form" component={Form} />
+          <ProtectedRoute exect path="/characters" component={Characters} />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>

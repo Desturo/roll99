@@ -15,13 +15,20 @@ const LandingPage = (props) => {
   return (
     <div>
       <h1>R99</h1>
-      <h3 onClick={() => {
+      <h3 style={ {cursor: "pointer"}} onClick={() => {
         auth.logout(() => {
           props.history.push("/")
         });
       }}>{username}</h3>
+      <ul>
+        <li style={ {cursor: "pointer"}}>Campaign Manager</li>
+        <li style={ {cursor: "pointer"}} onClick={() => {
+          props.history.push("/characters")
+        }}>My Characters</li>
+        <li style={ {cursor: "pointer"}}>My Campaigns</li>
+      </ul>
       <button onClick={() => {}}>Create Campaign</button>
-      <button onClick={() => {props.history.push("/character/create")}}>Create Character</button>
+      <button onClick={() => {props.history.push("/characters/create")}}>Create Character</button>
       <br />
       <input type="text" />
       <button onClick={() => {}}>Join Room</button>

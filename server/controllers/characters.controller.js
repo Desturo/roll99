@@ -13,6 +13,19 @@ export const getCharacters = async (req, res) => {
   }
 };
 
+export const getUsersCharacters = (req, res) => {
+  const userID = req.body.id;
+
+  CharaterModel.find({creator: userID}, (err, docs) => {
+    if(!err) {
+      res.status(200).send(docs);
+    } else {
+      res.sendStatus(500);
+      console.log(err);
+    }
+  })
+}
+
 export const createCharacter = async (req, res) => {
   let character = req.body;
 
@@ -22,6 +35,18 @@ export const createCharacter = async (req, res) => {
     newCharacter.save((error) => {
       if (error) return console.log(error);
     });
+
+    UserModel.findById(character.creator, (err, doc) => {
+      if(err) {
+        console.log(err);
+      }else {
+        doc.characters.push(newCharacter.id);
+        doc.save((err) => {
+          err && console.log(err);
+        })
+      }
+      
+    })
 
     res.status(201).json(newCharacter);
   } catch (error) {
