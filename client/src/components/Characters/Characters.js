@@ -17,7 +17,7 @@ const Characters = (props) => {
     const fetchChars = async () => {
         const sendObject = { id: auth.userID}
         const { data } = await api.fetchCharacters(sendObject);
-        console.log(data);
+        setCharacters(data);
     }
 
     useEffect(() => {
@@ -30,7 +30,12 @@ const Characters = (props) => {
             props.history.push("/")
         });
         }}>{username}</h3>
-            Characters
+        <h1>Characters</h1>
+            <ul>
+            {
+                characters.map((character) => <li key={character._id} >{character.firstName}</li>)
+            }
+            </ul>
         </div>
     )
 }
