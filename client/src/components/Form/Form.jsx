@@ -12,8 +12,8 @@ const Form = (props) => {
   const [character, setCharacter] = useState({
     firstName: "",
     lastName: "",
-    creator: "",
     race: "",
+    creator: "",
     origin: "",
     abilities: [],
     attributes: {
@@ -26,16 +26,13 @@ const Form = (props) => {
     },
   });
 
-  const getUser = async () => {
-    await auth.updateUser();
-    setCharacter({ ...character, creator: auth.user });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await getUser();
-    const { data } = await api.createCharacter(character);
-    console.log(data);
+    auth.updateUser().then(() => {
+      let newChar = character;
+      newChar.creator = auth.userID;
+      api.createCharacter(newChar);
+    });
   };
 
   const addAbility = async () => {

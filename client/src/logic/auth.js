@@ -5,6 +5,7 @@ class Auth {
   constructor() {
     this.authenticated = false;
     this.user = "no user";
+    this.userID = undefined;
   }
 
   login = async (user, cb) => {
@@ -25,7 +26,7 @@ class Auth {
 
   logout(cb) {
     this.authenticated = false;
-    Cookies.remove("jwToken")
+    Cookies.remove("jwToken");
     cb();
   }
 
@@ -46,11 +47,13 @@ class Auth {
       const data = await api.checkToken();
 
       if (data.data.valid) {
-        console.log(`Changed Username to ${data.data.username}`);
         this.user = data.data.username;
+        this.userID = data.data.userID;
+        return this.username;
       }
     } catch (error) {
       this.user = "error";
+      return this.username;
     }
   };
 }

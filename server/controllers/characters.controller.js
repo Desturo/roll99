@@ -1,37 +1,30 @@
-import CharaterModel from '../models/character.model.js';
-import UserModel from "../models/user.model.js"
+import CharaterModel from "../models/character.model.js";
+import UserModel from "../models/user.model.js";
 
 export const getCharacters = async (req, res) => {
+  //req.user object availiable because of middleware
 
-    //req.user object availiable because of middleware
+  try {
+    const characters = await CharaterModel.find();
 
-    try {
-        const characters = await CharaterModel.find();
-
-        res.status(200).json(characters);
-        
-    } catch (error) {
-        res.status(404).json({ message: error });
-    }
-}
+    res.status(200).json(characters);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
 
 export const createCharacter = async (req, res) => {
+  let character = req.body;
 
-    const character = req.body;
+  const newCharacter = new CharaterModel(character);
 
-    UserModel.find({ username: character.creator}, (err, doc) => {
-        console.log(doc[0].id);
-    })
+  try {
+    newCharacter.save((error) => {
+      if (error) return console.log(error);
+    });
 
-    const newCharacter = new CharaterModel(character);
-
-    try {
-        newCharacter.save((error) => {
-            if (error) return console.log(error);
-        });
-
-        res.status(201).json(newCharacter);
-    } catch (error) {
-        res.status(404).json({ message: error });
-    }
-}
+    res.status(201).json(newCharacter);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};

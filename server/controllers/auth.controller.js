@@ -2,7 +2,6 @@ import bcrtpt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import UserModel from "../models/user.model.js";
-import cookieParser from "cookie-parser";
 
 let refreshTokens = [];
 
@@ -21,7 +20,15 @@ export const checkToken = (req, res) => {
       if (err) {
         res.sendStatus(403);
       } else {
-        res.status(200).send({ valid: true, username: user.username });
+        UserModel.find({ username: user.username }, (err, doc) => {
+          if (err) {
+            console.log(`Error`);
+            return;
+          }
+          res
+            .status(200)
+            .send({ valid: true, username: user.username, userID: doc[0].id });
+        });
       }
     }
   );
