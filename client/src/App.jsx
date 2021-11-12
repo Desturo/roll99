@@ -1,9 +1,5 @@
 import { React, useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute/protected.route";
@@ -18,6 +14,7 @@ import CreateUser from "./components/CreateUser/CreateUser";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Characters from "./components/Characters/Characters";
 import CreateCampaign from "./components/CreateCampaign/CreateCampaign";
+import CampaignRoom from "./components/CampaignRoom/CampaignRoom";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -47,7 +44,16 @@ function App() {
           <ProtectedRoute exact path="/characters/create" component={Form} />
           <ProtectedRoute exact path="/form" component={Form} />
           <ProtectedRoute exect path="/characters" component={Characters} />
-          <ProtectedRoute exect path="/campaigns/create" component={CreateCampaign} />
+          <ProtectedRoute
+            exect
+            path="/campaigns/create"
+            component={CreateCampaign}
+          />
+          <ProtectedRoute
+            exect
+            path="/campaigns/:campaignID"
+            component={CampaignRoom}
+          />
           <Route path="*" component={() => "404 NOT FOUND"} />
         </Switch>
       </Router>

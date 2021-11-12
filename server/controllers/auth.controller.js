@@ -72,7 +72,6 @@ export const loginUser = async (req, res) => {
       //Just sends tokenst as json
       //res.json({ accesToken: accesToken, refreshToken: refreshToken });
       //sending tokens as Cookies
-      console.log("sendToken");
       const FiveMinInMs = 5 * 60 * 1000;
       res.cookie("jwToken", accesToken, {
         maxAge: FiveMinInMs,
