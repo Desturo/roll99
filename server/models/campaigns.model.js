@@ -7,7 +7,10 @@ const sessionSchema = mongoose.Schema({
 });
 
 const campaignSchema = mongoose.Schema({
+    campaignName: String,
     players: Array,
+    characters: Array,
+    code: String,
     gamemaster: String,
     sessions: [sessionSchema]
 });

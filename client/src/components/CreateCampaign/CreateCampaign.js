@@ -27,7 +27,7 @@ const CreateCampaign = (props) => {
             setCampaignName(e.target.value)
         }}/>
         <button onClick={() => {
-            api.createCampaign({ campaignName: campaignName });
+            api.createCampaign({ campaignName: campaignName, gamemaster: auth.userID });
             setCampaignName("")
         }} >Create Campaing</button>
         </div>
