@@ -39,7 +39,8 @@ export const addPlayer = (req, res) => {
   CampaingModel.findOne({ code: req.body.campaignID }, (err, campaign) => {
     if (err) {
       console.log(err);
-      res.sendStatus(400);
+      res.status(404);
+      res.send("Campaign not found");
     } else {
       if (!campaign.players.includes(req.body.userID)) {
         campaign.players.push(req.body.userID);
