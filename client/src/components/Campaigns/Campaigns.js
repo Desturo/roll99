@@ -39,7 +39,7 @@ const Campaigns = (props) => {
       </h3>
       <ul>
         {campaignsArray.map((campaign) => {
-          <li key={campaign.campaignID}>{campaign.campaignName}</li>;
+          return <li key={campaign.campaignID}>{campaign.campaignName}</li>;
         })}
       </ul>
     </div>

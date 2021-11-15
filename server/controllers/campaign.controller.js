@@ -56,6 +56,7 @@ export const getUsersCampaigns = (req, res) => {
               campaignPlayers.push({
                 name: campaign.campaignName,
                 id: campaign.id,
+                code: campaign.code,
                 players: campaign.players,
               });
             });
@@ -68,6 +69,7 @@ export const getUsersCampaigns = (req, res) => {
                     returnCampaigns.push({
                       campaignName: campaignData.name,
                       campaignID: campaignData.id,
+                      campaignCode: campaignData.code
                     });
                   }
                 });
