@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import CodeModel from "../models/codes.model.js";
 import UserModel from "../models/user.model.js";
 
+//Create campaign in Database. Get's Name of Campaign and ID of the creating Gammaster in the req body
 export const createCampaign = async (req, res) => {
   const campaignName = req.body.campaignName;
 
