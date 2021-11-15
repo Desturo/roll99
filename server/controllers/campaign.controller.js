@@ -1,6 +1,8 @@
 import CampaingModel from "../models/campaigns.model.js";
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
 import CodeModel from "../models/codes.model.js";
+import UserModel from "../models/user.model.js";
 
 export const createCampaign = async (req, res) => {
   const campaignName = req.body.campaignName;
@@ -33,6 +35,49 @@ export const createCampaign = async (req, res) => {
   });
 
   res.sendStatus(200);
+};
+
+export const getUsersCampaigns = (req, res) => {
+  let campaignPlayers = [];
+  let returnCampaigns = [];
+  jwt.verify(
+    req.cookies.jwToken,
+    process.env.ACCESS_TOKEN_SECERET,
+    (err, user) => {
+      if (err) {
+        console.log(err);
+      } else {
+        CampaingModel.find((err, docs) => {
+          if (err) {
+            console.log(err);
+          } else {
+            docs.map((campaign) => {
+              campaignPlayers.push({
+                name: campaign.campaignName,
+                id: campaign.id,
+                players: campaign.players,
+              });
+            });
+            UserModel.findOne({ username: user.username }, (error, user) => {
+              if (error) {
+                console.log(error);
+              } else {
+                campaignPlayers.map((campaignData) => {
+                  if (campaignData.players.includes(user.id)) {
+                    returnCampaigns.push({
+                      campaignName: campaignData.name,
+                      campaignID: campaignData.id,
+                    });
+                  }
+                });
+                res.json({ campaigns: returnCampaigns });
+              }
+            });
+          }
+        });
+      }
+    }
+  );
 };
 
 export const addPlayer = (req, res) => {

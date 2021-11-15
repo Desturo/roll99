@@ -3,8 +3,12 @@ import { Route, Redirect } from "react-router-dom";
 import auth from "../../logic/auth";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
+  const checkAuth = async () => {
+    await auth.isAuthenticated();
+  };
+
   useEffect(() => {
-    auth.isAuthenticated();
+    checkAuth();
   }, []);
   return (
     <Route

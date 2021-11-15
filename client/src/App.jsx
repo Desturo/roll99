@@ -15,6 +15,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import Characters from "./components/Characters/Characters";
 import CreateCampaign from "./components/CreateCampaign/CreateCampaign";
 import CampaignRoom from "./components/CampaignRoom/CampaignRoom";
+import Campaigns from "./components/Campaigns/Campaigns";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -43,14 +44,15 @@ function App() {
           <ProtectedRoute exact path="/home" component={LandingPage} />
           <ProtectedRoute exact path="/characters/create" component={Form} />
           <ProtectedRoute exact path="/form" component={Form} />
-          <ProtectedRoute exect path="/characters" component={Characters} />
+          <ProtectedRoute exact path="/characters" component={Characters} />
           <ProtectedRoute
-            exect
+            exact
             path="/campaigns/create"
             component={CreateCampaign}
           />
+          <ProtectedRoute exact path="/campaigns" component={Campaigns} />
           <ProtectedRoute
-            exect
+            exact
             path="/campaigns/:campaignID"
             component={CampaignRoom}
           />

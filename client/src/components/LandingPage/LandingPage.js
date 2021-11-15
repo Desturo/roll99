@@ -37,7 +37,14 @@ const LandingPage = (props) => {
         >
           My Characters
         </li>
-        <li style={{ cursor: "pointer" }}>My Campaigns</li>
+        <li
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            props.history.push("/campaigns");
+          }}
+        >
+          My Campaigns
+        </li>
       </ul>
       <button
         onClick={() => {

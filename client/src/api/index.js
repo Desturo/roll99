@@ -18,6 +18,9 @@ export const createUser = (newUser) =>
 export const loginUser = (userToCheck) =>
   axios.post(usersUrl + "/login", userToCheck);
 
+export const getUserCampaigns = () =>
+  axios.get(campaignsUrl, { withCredentials: true });
+
 export const checkToken = () =>
   axios.get(usersUrl + "/checkToken", { withCredentials: true });
 
