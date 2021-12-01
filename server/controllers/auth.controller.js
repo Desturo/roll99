@@ -72,9 +72,9 @@ export const loginUser = async (req, res) => {
       //Just sends tokenst as json
       //res.json({ accesToken: accesToken, refreshToken: refreshToken });
       //sending tokens as Cookies
-      const FiveMinInMs = 5 * 60 * 1000;
+      const YearinMs = 365 * 24 * 60 * 60 * 1000;
       res.cookie("jwToken", accesToken, {
-        maxAge: FiveMinInMs,
+        maxAge: YearinMs,
         // You can't access these tokens in the client's javascript
         httpOnly: false,
       });

@@ -69,7 +69,7 @@ export const getUsersCampaigns = (req, res) => {
                     returnCampaigns.push({
                       campaignName: campaignData.name,
                       campaignID: campaignData.id,
-                      campaignCode: campaignData.code
+                      campaignCode: campaignData.code,
                     });
                   }
                 });
@@ -102,7 +102,7 @@ export const addPlayer = (req, res) => {
           }
         });
       } else {
-        res.status(400);
+        res.status(200);
         return res.send("Player is already in the campaign");
       }
     }

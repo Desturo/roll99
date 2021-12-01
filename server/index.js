@@ -40,13 +40,18 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log(`connection ${socket.id.substr(0, 4)}`);
+  console.log(socket.id + "connected");
+  socket.on("roomMessage", (messageData) => {
+    console.log("called");
+    io.to(messageData.roomCode).emit("message", messageData);
+  });
+  socket.on("joinRoom", (roomCode) => {
+    socket.join(roomCode);
+  });
 
-  socket.emit("message", "welcome to R99");
-
-  socket.on("toServer", (message) => {
-    const mssageObject = { text: message, id: socket.id };
-    io.emit("toClient", mssageObject);
+  socket.on("leaveRoom", (roomCode) => {
+    console.log("left room");
+    socket.leave(roomCode);
   });
 });
 

@@ -1,25 +1,8 @@
 import React, { useEffect, useState } from "react";
 import auth from "../../logic/auth";
 import * as api from "../../api/index.js";
-import { socket } from "../../services/socket";
 
 const Campaigns = (props) => {
-  const [message, setMessage] = useState();
-
-  const sendMessage = () => {
-    socket.emit("toServer", message);
-  };
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    socket.once("toClient", (messageObject) => {
-      setMessages([...messages, messageObject]);
-      console.log(
-        `${messageObject.id.substr(0, 4)} said ${messageObject.text}`
-      );
-    });
-  }, [messages]);
-
   const [username, setUsername] = useState("nouser");
 
   const [campaignsArray, setCampaignsArray] = useState([
