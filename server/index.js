@@ -24,6 +24,7 @@ const io = new Server(server, {
 app.use(cookieParser());
 app.use(
   cors({
+    origin: ["http://www.desturo.de"],
     credentials: true,
   })
 );
