@@ -24,18 +24,17 @@ const io = new Server(server, {
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
     credentials: true,
   })
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/characters", characterRoutes);
-app.use("/auth", authRoutes);
-app.use("/campaigns", campaignRoutes);
+app.use("/api/characters", characterRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/campaigns", campaignRoutes);
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Welcome to the roll99 APi");
 });
 
