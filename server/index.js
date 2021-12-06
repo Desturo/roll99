@@ -14,7 +14,11 @@ const CONNECTION_URL = process.env.CONNECTION_URL;
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "http://www.desturo.de",
+  },
+});
 
 app.use(cookieParser());
 app.use(
