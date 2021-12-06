@@ -16,14 +16,14 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://www.desturo.de",
+    origin: "http://185.228.139.62",
   },
 });
 
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://www.desturo.de",
+    origin: "http://185.228.139.62",
     credentials: true,
   })
 );
