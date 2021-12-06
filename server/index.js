@@ -8,9 +8,9 @@ import cookieParser from "cookie-parser";
 
 import characterRoutes from "./routes/characters.routes.js";
 import authRoutes from "./routes/auth.routes.js";
-import campaignRoutes from "./routes/campaign.routes.js"
+import campaignRoutes from "./routes/campaign.routes.js";
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8800;
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
 const app = express();
@@ -22,18 +22,19 @@ const io = new Server(server, {
 });
 
 app.use(cookieParser());
-app.use(cors({
-  origin: ["http://localhost:3000"],
-  credentials: true
-}));
+app.use(
+  cors({
+    credentials: true,
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/characters", characterRoutes);
-app.use("/auth", authRoutes);
-app.use("/campaigns", campaignRoutes)
+app.use("/api/characters", characterRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/campaigns", campaignRoutes);
 
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.send("Hello to the roll99 APi");
 });
 

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const charactersUrl = "http://localhost:5000/characters";
-const usersUrl = "http://localhost:5000/auth";
-const campaignsUrl = "http://localhost:5000/campaigns";
+const charactersUrl = "http://185.228.139.62/api/characters";
+const usersUrl = "http://185.228.139.62/api/auth";
+const campaignsUrl = "http://185.228.139.62/api/campaigns";
 
 //fetch Characters belonging the user specified by id
 export const fetchCharacters = (id) => axios.post(charactersUrl + "/get", id);
