@@ -3,7 +3,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { Server } from "socket.io";
 import { createServer } from "http";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 import characterRoutes from "./routes/characters.routes.js";
@@ -24,7 +23,6 @@ const io = new Server(server, {
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://www.desturo.de"],
     credentials: true,
   })
 );

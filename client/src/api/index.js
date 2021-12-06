@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const charactersUrl = "http://185.228.139.62/api/characters";
-const usersUrl = "http://185.228.139.62/api/auth";
-const campaignsUrl = "http://185.228.139.62/api/campaigns";
+const charactersUrl = "http://www.desturo.de/api/characters";
+const usersUrl = "http://www.desturo.de/api/auth";
+const campaignsUrl = "http://www.desturo.de/api/campaigns";
 
 //fetch Characters belonging the user specified by id
 export const fetchCharacters = (id) => axios.post(charactersUrl + "/get", id);
