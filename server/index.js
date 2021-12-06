@@ -14,7 +14,7 @@ const CONNECTION_URL = process.env.CONNECTION_URL;
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, { cors: {origin: "*"}});
 
 app.use(cookieParser());
 // Add headers before the routes are defined
