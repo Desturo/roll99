@@ -17,6 +17,7 @@ const io = new Server(server);
 
 app.use(cookieParser());
 app.use(cors());
+app.options('*', cors());  // enable pre-flight
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
