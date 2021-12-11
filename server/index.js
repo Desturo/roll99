@@ -24,6 +24,7 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Contro-Allow-Credentials", true);
   next();
 });
+console.log("test");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
