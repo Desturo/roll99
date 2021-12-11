@@ -9,8 +9,11 @@ class Auth {
   }
 
   login = async (user, cb) => {
+    console.log("User: ", user);
     try {
       const { data } = await api.loginUser(user);
+
+      console.log("Data: ", data);
 
       if (data.loginValid) {
         const result = await api.checkToken();
