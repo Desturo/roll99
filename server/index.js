@@ -17,11 +17,13 @@ const server = createServer(app);
 const io = new Server(server);
 
 app.use(cookieParser());
-app.use(
-  cors({
-    credentials: true,
-  })
-);
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "http://185.228.139.62");
+  res.setHeader("Access-Contro-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+  res.setHeader("Access-Contro-Allow-Headers", "X-Requested-With, content-type");
+  res.setHeader("Access-Contro-Allow-Credentials", true);
+  next();
+});
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
