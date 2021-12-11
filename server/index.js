@@ -3,23 +3,18 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { Server } from "socket.io";
 import { createServer } from "http";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 import characterRoutes from "./routes/characters.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import campaignRoutes from "./routes/campaign.routes.js";
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8800;
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-  },
-});
+const io = new Server(server);
 
 app.use(cookieParser());
 app.use(
