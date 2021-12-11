@@ -13,6 +13,7 @@ export const getUsers = async (req, res) => {
 };
 
 export const checkToken = (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://www.desturo.de");
   jwt.verify(
     req.cookies.jwToken,
     process.env.ACCESS_TOKEN_SECERET,
