@@ -23,7 +23,7 @@ class Auth {
         cb();
       }
     } catch (error) {
-      console.log(error.passwordValid);
+      console.log(error);
     }
   };
 
