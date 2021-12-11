@@ -1,9 +1,9 @@
-import express from "express";
-import {
+const express = require('express');
+const {
   createCampaign,
   addPlayer,
   getUsersCampaigns,
-} from "../controllers/campaign.controller.js";
+} = require("../controllers/campaign.controller.js");
 
 const router = express.Router();
 
@@ -13,4 +13,4 @@ router.post("/players", addPlayer);
 
 router.get("/", getUsersCampaigns);
 
-export default router;
+module.exports = router;

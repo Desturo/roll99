@@ -1,7 +1,7 @@
-import CharaterModel from "../models/character.model.js";
-import UserModel from "../models/user.model.js";
+const CharaterModel = require("../models/character.model.js");
+const UserModel = require("../models/user.model.js");
 
-export const getCharacters = async (req, res) => {
+const getCharacters = async (req, res) => {
   //req.user object availiable because of middleware
 
   try {
@@ -13,7 +13,7 @@ export const getCharacters = async (req, res) => {
   }
 };
 
-export const getUsersCharacters = (req, res) => {
+const getUsersCharacters = (req, res) => {
   const userID = req.body.id;
 
   CharaterModel.find({creator: userID}, (err, docs) => {
@@ -26,7 +26,7 @@ export const getUsersCharacters = (req, res) => {
   })
 }
 
-export const createCharacter = async (req, res) => {
+const createCharacter = async (req, res) => {
   let character = req.body;
 
   const newCharacter = new CharaterModel(character);
@@ -53,3 +53,7 @@ export const createCharacter = async (req, res) => {
     res.status(404).json({ message: error });
   }
 };
+
+exports.createCharacter = createCharacter;
+exports.getUsersCharacters = getUsersCharacters;
+exports.getCharacters = getCharacters;

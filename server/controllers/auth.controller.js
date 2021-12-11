@@ -1,19 +1,18 @@
-import bcrtpt from "bcrypt";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-import UserModel from "../models/user.model.js";
+const bcrtpt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+const UserModel = require( "../models/user.model.js");
 
 let refreshTokens = [];
 
 dotenv.config();
 
-export const getUsers = async (req, res) => {
+const getUsers = async (req, res) => {
   const users = await UserModel.find({});
   res.json(users);
 };
 
-export const checkToken = (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", true);
+const checkToken = (req, res) => {
   jwt.verify(
     req.cookies.jwToken,
     process.env.ACCESS_TOKEN_SECERET,
@@ -35,7 +34,7 @@ export const checkToken = (req, res) => {
   );
 };
 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const hashedPassword = await bcrtpt.hash(req.body.password, 10);
 
@@ -60,7 +59,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-export const loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
   const query = await UserModel.find({ username: req.body.username });
 
   const user = { username: query[0].username, password: query[0].password };
@@ -88,12 +87,12 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const logoutUser = (req, res) => {
+const logoutUser = (req, res) => {
   refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
   res.sendStatus(204);
 };
 
-export const getRefreshtoken = (req, res) => {
+const getRefreshtoken = (req, res) => {
   const refreshToken = req.body.token;
 
   if (refreshToken == null) return res.sendStatus(401);
@@ -109,3 +108,10 @@ export const getRefreshtoken = (req, res) => {
 const generateAccesToken = (user) => {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECERET);
 };
+
+exports.getUsers = getUsers;
+exports.checkToken =  checkToken;
+exports.createUser =  createUser;
+exports.loginUser = loginUser;
+exports.logoutUser = logoutUser;
+exports.getRefreshtoken=  getRefreshtoken;

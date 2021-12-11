@@ -1,11 +1,11 @@
-import CampaingModel from "../models/campaigns.model.js";
-import crypto from "crypto";
-import jwt from "jsonwebtoken";
-import CodeModel from "../models/codes.model.js";
-import UserModel from "../models/user.model.js";
+const CampaingModel = require("../models/campaigns.model.js");
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const CodeModel = require("../models/codes.model.js");
+const UserModel = require("../models/user.model.js");
 
 //Create campaign in Database. Get's Name of Campaign and ID of the creating Gammaster in the req body
-export const createCampaign = async (req, res) => {
+const createCampaign = async (req, res) => {
   const campaignName = req.body.campaignName;
 
   const gamemaster = req.body.gamemaster;
@@ -38,7 +38,7 @@ export const createCampaign = async (req, res) => {
   res.sendStatus(200);
 };
 
-export const getUsersCampaigns = (req, res) => {
+const getUsersCampaigns = (req, res) => {
   let campaignPlayers = [];
   let returnCampaigns = [];
   jwt.verify(
@@ -83,7 +83,7 @@ export const getUsersCampaigns = (req, res) => {
   );
 };
 
-export const addPlayer = (req, res) => {
+const addPlayer = (req, res) => {
   CampaingModel.findOne({ code: req.body.campaignID }, (err, campaign) => {
     if (err) {
       console.log(err);
@@ -108,3 +108,7 @@ export const addPlayer = (req, res) => {
     }
   });
 };
+
+exports.createCampaign = createCampaign;
+exports.addPlayer = addPlayer
+exports.getUsersCampaigns = getUsersCampaigns;

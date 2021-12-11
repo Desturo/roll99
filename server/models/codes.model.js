@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const codeSchema = mongoose.Schema({
     code: String,     
@@ -6,4 +6,4 @@ const codeSchema = mongoose.Schema({
 
 const CodeModel = mongoose.model('CodeModel', codeSchema);
 
-export default CodeModel;
+module.exports = CodeModel;

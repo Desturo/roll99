@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const AbilitySchema = mongoose.Schema({
     name: String,
@@ -25,4 +25,4 @@ const characterSchema = mongoose.Schema({
 
 const CharaterModel = mongoose.model('CharacterModel', characterSchema);
 
-export default CharaterModel;
+module.exports = CharaterModel;

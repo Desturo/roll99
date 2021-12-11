@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const sessionSchema = mongoose.Schema({
     atendants: Array,
@@ -17,4 +17,4 @@ const campaignSchema = mongoose.Schema({
 
 const CampaingModel = mongoose.model('CampaingModel', campaignSchema);
 
-export default CampaingModel;
+module.exports = CampaingModel;

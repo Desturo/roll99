@@ -1,29 +1,22 @@
-import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import { Server } from "socket.io";
-import { createServer } from "http";
-import cookieParser from "cookie-parser";
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const http = require("http");
+const server = http.createServer(app);
+const mongoose = require("mongoose");
+const { Server } = require("socket.io");
+const cookieParser = require("cookie-parser");
 
-import characterRoutes from "./routes/characters.routes.js";
-import authRoutes from "./routes/auth.routes.js";
-import campaignRoutes from "./routes/campaign.routes.js";
+const characterRoutes = require("./routes/characters.routes.js");
+const authRoutes = require("./routes/auth.routes.js");
+const campaignRoutes = require("./routes/campaign.routes.js");
 
 const PORT = process.env.PORT || 8800;
 const CONNECTION_URL = process.env.CONNECTION_URL;
-
-const app = express();
-const server = createServer(app);
 const io = new Server(server);
 
 app.use(cookieParser());
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Contro-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-  res.setHeader("Access-Contro-Allow-Headers", "X-Requested-With, content-type");
-  res.setHeader("Access-Contro-Allow-Credentials", true);
-  next();
-});
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
